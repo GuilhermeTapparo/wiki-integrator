@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-gui
+  labels:
+    app: test-gui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-gui
+  template:
+    metadata:
+      labels:
+        app: test-gui
+    spec:
+      containers:      
+      - name: test-gui
+        image: registry.gitlab.com/guilhermetapparo1/wikiintegrator
+        resources:
+          requests:
+            memory: 10Mi
+            cpu: 10m
+          limits:
+            memory: 50Mi
+            cpu: 50m         
+        env:
+        - name: "Environment"
+          value: "Sandbox"
+      imagePullSecrets:
+      - name: regcred-guilherme
